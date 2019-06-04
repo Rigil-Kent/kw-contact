@@ -1,0 +1,6 @@
+env/
+*.db
+migrations/
+__pycache__/
+*.ini
+*.cfg

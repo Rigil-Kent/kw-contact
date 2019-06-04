@@ -1,0 +1,427 @@
+<form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <fieldset class="field-border">
+    <legend class="field-border">Personal Information</legend>
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.first_name.label }}
+            {{ form.first_name(class="form-control") }}
+            {% for error in form.first_name.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.middle_name.label }}
+            {{ form.middle_name(class="form-control") }}
+            {% for error in form.middle_name.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.last_name.label }}
+            {{ form.last_name(class="form-control") }}
+            {% for error in form.last_name.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.prefix.label }}
+            {{ form.prefix(class="form-control") }}
+            {% for error in form.prefix.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <div class="col form-group">
+            {{ form.suffix.label }}
+            {{ form.suffix(class="form-control") }}
+            {% for error in form.suffix.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.birthday.label }}
+            {{ form.birthday(class="form-control", rows="5") }}
+            {% for error in form.birthday.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+  
+        <div class="col form-group">
+            {{ form.home_anniversary.label }}
+            {{ form.home_anniversary(class="form-control", rows="5") }}
+            {% for error in form.home_anniversary.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.about.label }}
+            {{ form.about(class="form-control", rows="5") }}
+            {% for error in form.about.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    </fieldset>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.country_code.label }}
+            {{ form.country_code(class="form-control", readonly=readonly, value='USA') }}
+            {% for error in form.country_code.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <fieldset class="field-border">
+    <legend class="field-border">Contact Info</legend>
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.home_phone.label }}
+            {{ form.home_phone(class="form-control") }}
+            {% for error in form.home_phone.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.work_phone.label }}
+            {{ form.work_phone(class="form-control") }}
+            {% for error in form.work_phone.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.other_phone.label }}
+            {{ form.other_phone(class="form-control") }}
+            {% for error in form.other_phone.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control") }}
+            {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.email2.label }}
+            {{ form.email2(class="form-control") }}
+            {% for error in form.email2.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    </fieldset>
+
+    <fieldset class="field-border">
+    <legend class="field-border">Address 1</legend>
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.street1.label }}
+            {{ form.street1(class="form-control") }}
+            {% for error in form.street1.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.city1.label }}
+            {{ form.city1(class="form-control") }}
+            {% for error in form.city1.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.state1.label }}
+            {{ form.state1(class="form-control") }}
+            {% for error in form.state1.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.postal_code1.label }}
+            {{ form.postal_code1(class="form-control") }}
+            {% for error in form.postal_code1.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    </fieldset>
+
+    <fieldset class="field-border">
+    <legend class="field-border">Address 2</legend>
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.street2.label }}
+            {{ form.street2(class="form-control") }}
+            {% for error in form.street2.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.city2.label }}
+            {{ form.city2(class="form-control") }}
+            {% for error in form.city2.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.state2.label }}
+            {{ form.state2(class="form-control") }}
+            {% for error in form.state2.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.postal_code2.label }}
+            {{ form.postal_code2(class="form-control") }}
+            {% for error in form.postal_code2.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    </fieldset>
+
+    <fieldset class="field-border">
+    <legend class="field-border">Work Information</legend>
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.company_street.label }}
+            {{ form.company_street(class="form-control") }}
+            {% for error in form.company_street.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.company_city.label }}
+            {{ form.company_city(class="form-control") }}
+            {% for error in form.company_city.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.company_state.label }}
+            {{ form.company_state(class="form-control") }}
+            {% for error in form.company_state.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.company_postal.label }}
+            {{ form.company_postal(class="form-control") }}
+            {% for error in form.company_postal.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.company_country.label }}
+            {{ form.company_country(class="form-control", readonly=readonly, value='USA') }}
+            {% for error in form.company_country.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    </fieldset>
+
+    <fieldset class="field-border">
+    <legend class="field-border">Realtor Information</legend>
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.first_time(class="form-check-input") }}
+            {{ form.first_time.label(class="form-check-label") }}
+            {% for error in form.first_time.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.agent.label }}
+            {{ form.agent(class="form-control") }}
+            {% for error in form.agent.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.vendor.label }}
+            {{ form.vendor(class="form-control") }}
+            {% for error in form.vendor.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.investor.label }}
+            {{ form.investor(class="form-control") }}
+            {% for error in form.investor.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.loan_officer.label }}
+            {{ form.loan_officer(class="form-control") }}
+            {% for error in form.loan_officer.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.talent.label }}
+            {{ form.talent(class="form-control") }}
+            {% for error in form.talent.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.builder.label }}
+            {{ form.builder(class="form-control") }}
+            {% for error in form.builder.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.reo.label }}
+            {{ form.reo(class="form-control") }}
+            {% for error in form.reo.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.short_sale.label }}
+            {{ form.short_sale(class="form-control") }}
+            {% for error in form.short_sale.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.expired.label }}
+            {{ form.expired(class="form-control") }}
+            {% for error in form.expired.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.fsbo.label }}
+            {{ form.fsbo(class="form-control") }}
+            {% for error in form.fsbo.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.sphere.label }}
+            {{ form.sphere(class="form-control") }}
+            {% for error in form.sphere.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.allied_resource.label }}
+            {{ form.allied_resource(class="form-control") }}
+            {% for error in form.allied_resource.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.referral_sources.label }}
+            {{ form.referral_sources(class="form-control") }}
+            {% for error in form.referral_sources.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+    </div>
+    </fieldset>
+
+    <fieldset class="field-border">
+    <legend class="field-border">Meta Data</legend>
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.notes.label }}
+            {{ form.notes(class="form-control") }}
+            {% for error in form.notes.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.tags.label }}
+            {{ form.tags(class="form-control") }}
+            {% for error in form.tags.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.source.label }}
+            {{ form.source(class="form-control") }}
+            {% for error in form.source.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    </fieldset>
+   <p> {{form.submit(class="btn btn-success") }}</p>
+
+</form>
