@@ -8,14 +8,21 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename="style.css") }}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     {% block scripts %}
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
+    {% endblock %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
     <title>KW Contacts</title>
   </head>
-  <body>
+  <body style="background-image: url({{ url_for('static', filename='kwbg.jpg')}}); background-position: 40% 80%; background-repeat: no-repeat; background-attachment:fixed;">
 
 
 <div class="container">
 
-<h1 class="text-center">KW Contact DB Edit</h1>
+<h1 class="text-center">KW Contact DB Edit</h1><a href="{{ url_for('contacts') }}" class="btn btn-info w-100 rounded-0">View Contacts</a>
 {% include 'forms/add_contact.html' %}
 
 </div>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename="style.css") }}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     {% block scripts %}
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
+    {% endblock %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    <title>{{ contact.first_name }} {{ contact.last_name }} | KW Contacts</title>
+  </head>
+  <body style="background-image: url({{ url_for('static', filename='kwbg.jpg')}}); background-position: 90% 80%; background-repeat: no-repeat; background-attachment:fixed;">
+
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col">
+          <a href="{{ url_for('contacts') }}" class="btn btn-info rounded-0"><span class="fa fa-arrow-left "></span> Back To Contacts</a>
+          <a href="{{ url_for('edit_contact', id=contact.id) }}" class="btn btn-success rounded-0"><span class="fa fa-pencil"></span> Edit <strong>{{ contact.first_name }}</strong>'s Contact Information</a>
+          <h1 class="pb-0 mb-0">{{ contact.legal_name }}</h1>
+          <small class="text-muted py-0 my-0">of {{ contact.city1 }}, {{ contact.state1 }} {{ contact.postal_code1 }}</small>
+          <h5>Birthday: {{ moment(contact.birthday).format('LL')}}</h5>
+          <h5>Home Anniversary: {{ moment(contact.home_anniversary).format('LL')}}</h5>
+          <p class="lead">{{ contact.about }}</p>
+
+          <div class="row">
+            <div class="col">
+                <fieldset class="field-border mb-0 pb-0">
+                  <legend class="field-border">Notes</legend>
+                  <p class="mb-0 pb-0"> {{ contact.notes }} </p>
+                </fieldset>
+                <small class="text-muted mt-0 pt-0"><strong>Tags:</strong> {{ contact.tags }}</small>
+            </div>
+          </div>
+      </div>
+
+      <div class="col">
+        <fieldset class="field-border w-50 mr-auto">
+        <legend class="fieldborder text-center w-50">Contact Info</legend>
+            <ul class="list-unstyled">
+                <li class="list-item"><span class="fa fa-envelope-o font-weight-bold"> Email:</span> {% if contact.email %} <a href="mailto://{{ contact.email }}">{{ contact.email }}</a> {% else %} <small class="text-muted">None Provided</small> {% endif %}</li>
+                <li class="list-item"><span class="fa fa-mobile font-weight-bold"> Mobile:</span> {% if contact.mobile_phone %} <a href="tel://{{ contact.mobile_phone }} "></a>{% else %} <small class="text-muted">None Provided</small>{% endif %}</li>
+                <li class="list-item"><span class="fa fa-phone font-weight-bold"> Home:</span> {% if contact.home_phone %} <a href="tel://{{ contact.home_phone }}">{{ contact.home_phone }}</a>{% else %}<small class="text-muted">None Provided</small>{% endif %}</li>
+                <li class="list-item"><span class="fa fa-phone font-weight-bold"> Work:</span> {% if contact.work_phone %} <a href="tel://{{ contact.work_phone }}">{{ contact.work_phone }}</a>{% else %}<small class="text-muted">None Provided</small>{% endif %}</li>
+            </ul>
+
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="{{ contact.facebook }}" class=""><span class="fa fa-facebook"></span></a></li>
+                <li class="list-inline-item"><a href="{{ contact.twitter }}" class=""><span class="fa fa-twitter"></span></a></li>
+                <li class="list-inline-item"><a href="{{ contact.linkedin }}" class=""><span class="fa fa-linkedin"></span></a></li>
+                <li class="list-inline-item"><a href="{{ contact.google }}" class=""><span class="fa fa-google-plus"></span></a></li>
+                <li class="list-inline-item"><a href="{{ contact.pintrest }}" class=""><span class="fa fa-pinterest"></span></a></li>
+                <li class="list-inline-item"><a href="{{ contact.instagram }}" class=""><span class="fa fa-instagram"></span></a></li>
+            </ul>
+        </fieldset>
+
+        <fieldset class="field-border">
+        <legend class="fieldborder text-center w-25">System Tags</legend>
+        <div class="row">
+          <div class="col">
+        <ul class="list-unstyled">
+            <li class="list-item"> {% if contact.agent == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Agent</li>
+            <li class="list-item"> {% if contact.vendor == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Vendor</li>
+            <li class="list-item"> {% if contact.investor == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Investor</li>
+            <li class="list-item"> {% if contact.loan_officer == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Loan Officer</li>
+            <li class="list-item"> {% if contact.talent == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Talent</li>
+            <li class="list-item"> {% if contact.builder == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Builder</li>
+            <li class="list-item"> {% if contact.reo == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} REO</li>
+        </ul>
+          </div>
+
+          <div class="col">
+            <ul class="list-unstyled">
+              <li class="list-item"> {% if contact.short_sale == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Short Sale</li>
+              <li class="list-item"> {% if contact.expired == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Expired</li>
+              <li class="list-item"> {% if contact.fsbo == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} FSBO</li>
+              <li class="list-item"> {% if contact.sphere == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Sphere</li>
+              <li class="list-item"> {% if contact.allied_resource == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Allied Resource</li>
+              <li class="list-item"> {% if contact.referral_sources == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} Referral Sources</li>
+              <li class="list-item"> {% if contact.first_time == True %} <span class="fa fa-check-square-o"></span> {% else %}<span class="fa fa-square-o"></span> {% endif %} First Time</li>
+            </ul>
+          </div>
+
+        </div>
+      </fieldset>
+      </div>
+  </div>
+
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

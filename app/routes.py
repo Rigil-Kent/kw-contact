@@ -1,5 +1,9 @@
 from app import app, db
+import sqlite3
 import pandas as pd
+import xlsxwriter
+from openpyxl import load_workbook
+from datetime import datetime
 from app.forms import ContactForm
 from app.models import Contact
 from flask import render_template, redirect, flash, Markup, url_for, request
@@ -8,7 +12,6 @@ from flask import render_template, redirect, flash, Markup, url_for, request
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = ContactForm()
-    writer = pd.ExcelWriter(url_for('static', filename='empty_db.xlsx'), engine='xlsxwriter')
 
     if form.validate_on_submit():
         contact = Contact()
@@ -33,6 +36,7 @@ def index():
         contact.city2 = form.city2.data
         contact.postal_code2 = form.postal_code2.data
         contact.state2 = form.state2.data
+        contact.company_name = form.company_name.data
         contact.company_street = form.company_street.data
         contact.company_city = form.company_city.data
         contact.company_state = form.company_state.data
@@ -41,7 +45,7 @@ def index():
         contact.company_title = form.company_title.data
         contact.company_department = form.company_department.data
         contact.birthday = form.birthday.data
-        contact.home_anniversary = form.home_anniversary.data
+        contact.home_anniversary = form.birthday.data
         contact.agent = form.agent.data
         contact.vendor = form.vendor.data
         contact.loan_officer = form.loan_officer.data
@@ -63,71 +67,85 @@ def index():
         contact.google = form.google.data
         contact.pintrest = form.pintrest.data
         contact.instagram = form.instagram.data
-
-        df = pd.DataFrame({
-            'First Name': contact.first_name,
-            'Middle Name': contact.middle_name,
-            'Last Name': contact.last_name,
-            'Prefix': contact.prefix,
-            'Suffix': contact.suffix,
-            'Full Legal Name': contact.legal_name,
-            'About': contact.about,
-            'Country Code': contact.country_code,
-            'Mobile Phone': contact.other_phone,
-            'Country Code': contact.country_code,
-            'Home Phone': contact.home_phone,
-            'Country Code': contact.country_code,
-            'Work Phone': contact.work_phone,
-            'Email': contact.email,
-            'Email 2': contact.email2,
-            'Street': contact.street1,
-            'City': contact.city1,
-            'State/Province': contact.state1,
-            'Postal Code': contact.postal_code1,
-            'Street': contact.street2,
-            'City': contact.city2,
-            'State/Province': contact.state2,
-            'Postal Code': contact.postal_code2,
-            'Company': contact.company_name,
-            'Street': contact.company_street,
-            'City': contact.company_city,
-            'State/Province': contact.company_state,
-            'Postal Code': contact.company_postal,
-            'Country/Region': contact.company_country,
-            'Title': contact.company_title,
-            'Department': contact.company_department,
-            'Birthday': contact.birthday,
-            'Home Anniversary': contact.home_anniversary,
-            'Required*': '',
-            'Agent': contact.agent,
-            'Vendor': contact.vendor,
-            'Loan Officer': contact.loan_officer,
-            'Talent': contact.talent,
-            'Builder': contact.builder,
-            'REO': contact.reo,
-            'Short Sale': contact.short_sale,
-            'Expired': contact.expired,
-            'Sphere': contact.sphere,
-            'Allied Resource': contact.allied_resource,
-            'Referral Sources': contact.referral_sources,
-            'First Time': contact.first_time,
-            'Tags': contact.tags,
-            'Notes': contact.notes,
-            'Added': contact.date_added,
-            'Facebook': contact.facebook,
-            'Twitter': contact.twitter,
-            'LinkedIn': contact.linkedin,
-            'Google+': contact.google,
-            'Pintrest': contact.pintrest,
-            'Instagram': contact.instagram
-        })
-
+        
+        
         db.session.add(contact)
         db.session.commit()
 
-        df.to_excel(writer, sheet_name="Contacts")
-        writer.save()
-        message = Markup('<div class="alert alert-success alert-dismissible"><button type="button" class="close">&times;</button>Contact {} added successfully.</div>')
+        message = Markup('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Contact {} added successfully.</div>'.format(contact.legal_name))
         flash(message)
-        return redirect(url_for(request.url))
+        return redirect(url_for('contacts'))
     return render_template('index.html', form=form)
+
+
+
+@app.route('/contacts')
+def contacts():
+    contacts = Contact.query.all()
+    count = Contact.query.count()
+    form = ContactForm()
+    
+    if count == 0:
+        message = Markup('<div class="mt-3 alert alert-info alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>You currently have <strong>0</strong> contacts.</div>')
+        flash(message)
+
+    fields = [field.label.text for field in ContactForm() if field.label if field.label.text != 'CSRF Token' or field.label.text != 'Add Contact']
+    return render_template('contacts.html', contacts=contacts)
+
+@app.route('/export')
+def export():
+    form = ContactForm()
+    
+    # grab all ContactForm field labels
+    fields = [field.label.text for field in ContactForm()]
+
+    workbook = xlsxwriter.Workbook(r'app/static/kw_db.xlsx')
+    worksheet = workbook.add_worksheet()
+
+    # write Header 1
+    worksheet.write('R1', 'Address 1')
+    worksheet.write('V1', 'Address 2')
+    worksheet.write('AA1', 'Company Address')
+    worksheet.write('AH1', 'Key Dates')
+    worksheet.write('AJ1', 'STATUS GROUP')
+    worksheet.write('AK1', 'System Tags (Select Y if applies)')
+    worksheet.write('AY1', 'User Tags')
+    worksheet.write('AZ1', 'Notes')
+    worksheet.write('BD1', 'SOCIAL MEDIA')
+
+    # write form fields to Header 2
+    for i, d in enumerate(fields[:-3]):
+        worksheet.write(1, i, d)
+
+    # write db data to excel file
+    row = 2
+    col = 0
+    contacts = Contact.query.all()
+    for i, contact in enumerate(contacts):
+        data = [contact.first_name, contact.middle_name, contact.last_name, contact.prefix, contact.suffix, contact.legal_name, contact.about, contact.country_code, contact.mobile_phone, contact.country_code, contact.home_phone, contact.country_code, contact.work_phone, contact.country_code, contact.other_phone, contact.email, contact.email2, contact.street1, contact.city1, contact.state1, contact.postal_code1, contact.street2, contact.city2, contact.state2, contact.postal_code2, contact.company_name, contact.company_street, contact.company_city, contact.company_state, contact.company_postal, contact.company_country, contact.company_department, contact.company_title, contact.birthday, contact.home_anniversary, "Null", contact.agent, contact.vendor, contact.investor, contact.loan_officer, contact.talent, contact.builder, contact.reo, contact.short_sale, contact.expired, contact.fsbo, contact.sphere, contact.allied_resource, contact.referral_sources, contact.first_time, contact.tags, contact.notes, contact.source, contact.other_source, contact.date_added, contact.facebook, contact.twitter, contact.linkedin, contact.google, contact.pintrest, contact.instagram]
+        for j, d in enumerate(data):
+            worksheet.write(row + i, col + j, d)
+
+    workbook.close()
+    return redirect(url_for('contacts'))
+
+
+@app.route('/contacts/delete/<id>')
+def delete_contact(id):
+    contact = Contact.query.filter_by(id=id).first_or_404()
+    db.session.delete(contact)
+    db.session.commit()
+    message = Markup('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Contact {} deleted.</div>'.format(contact.first_name + " " + contact.last_name))
+    flash(message)
+    return redirect(url_for('contacts'))
+
+@app.route('/contacts/view/<id>')
+def view_contact(id):
+    contact = Contact.query.filter_by(id=id).first_or_404()
+    return render_template('contact.html', contact=contact)
+
+@app.route('/contacts/edit/<id>')
+def edit_contact(id):
+    contact = Contact.query.filter_by(id=id).first_or_404()
+    form = ContactForm()
+    return render_template('edit_contact.html', contact=contact, form=form)

@@ -49,19 +49,67 @@
 
     <div class="form-row">
         <div class="col form-group">
-            {{ form.birthday.label }}
-            {{ form.birthday(class="form-control", rows="5") }}
-            {% for error in form.birthday.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
+             {{ form.birthday.label }}
+                
+                    <div class="form-group">
+                        <div class="input-group date" id="birthday" data-target-input="nearest">
+                            <input type="text" name="birthday" class="form-control datetimepicker-input" data-target="#birthday" value=""/>
+                            <div class="input-group-append" data-target="#birthday" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                          $(function () {
+                              $('#birthday').datetimepicker('date');
+                          });
+
+                          $('.datetimepicker-input').each(function() {
+                              var value = $(this).val();
+			                  $(this).datetimepicker({
+				                format: 'MM-DD-YYY HH:MM p',
+			                	date: value
+                    			});
+			                  $(this).val(value);
+                    		});
+
+                    </script>
+
+                    {% for error in form.birthday.errors %}
+                        {{ error }}
+                    {% endfor %}
         </div>
   
         <div class="col form-group">
-            {{ form.home_anniversary.label }}
-            {{ form.home_anniversary(class="form-control", rows="5") }}
-            {% for error in form.home_anniversary.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
+             {{ form.home_anniversary.label }}
+                
+                    <div class="form-group">
+                        <div class="input-group date" id="home_anniversary" data-target-input="nearest">
+                            <input type="text" name="home_anniversary" class="form-control datetimepicker-input" data-target="#home_anniversary" value=""/>
+                            <div class="input-group-append" data-target="#home_anniversary" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                          $(function () {
+                              $('#home_anniversary').datetimepicker('date');
+                          });
+
+                          $('.datetimepicker-input').each(function() {
+                              var value = $(this).val();
+			                  $(this).datetimepicker({
+				                format: 'MM-DD-YYY HH:MM p',
+			                	date: value
+                    			});
+			                  $(this).val(value);
+                    		});
+
+                    </script>
+
+                    {% for error in form.home_anniversary.errors %}
+                        {{ error }}
+                    {% endfor %}
         </div>
     </div>
 
@@ -70,6 +118,67 @@
             {{ form.about.label }}
             {{ form.about(class="form-control", rows="5") }}
             {% for error in form.about.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            <span class="fa fa-facebook"></span> {{ form.facebook.label }}
+            {{ form.facebook(class="form-control") }}
+            {% for error in form.facebook.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            <span class="fa fa-twitter"></span> {{ form.twitter.label }}
+            {{ form.twitter(class="form-control") }}
+            {% for error in form.twitter.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            <span class="fa fa-linkedin"></span> {{ form.linkedin.label }}
+            {{ form.linkedin(class="form-control") }}
+            {% for error in form.linkedin.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            <span class="fa fa-google-plus"></span> {{ form.google.label }}
+            {{ form.google(class="form-control") }}
+            {% for error in form.google.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            <span class="fa fa-pinterest"></span> {{ form.pintrest.label }}
+            {{ form.pintrest(class="form-control") }}
+            {% for error in form.pintrest.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+    <div class="form-row">
+        <div class="col form-group">
+            <span class="fa fa-instagram"></span> {{ form.instagram.label }}
+            {{ form.instagram(class="form-control") }}
+            {% for error in form.instagram.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
@@ -115,6 +224,14 @@
     </div>
 
     <div class="form-row">
+        <div class="col form-group">
+            {{ form.mobile_phone.label }}
+            {{ form.mobile_phone(class="form-control") }}
+            {% for error in form.mobile_phone.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
         <div class="col form-group">
             {{ form.email.label }}
             {{ form.email(class="form-control") }}
@@ -213,6 +330,35 @@
 
     <fieldset class="field-border">
     <legend class="field-border">Work Information</legend>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.company_name.label }}
+            {{ form.company_name(class="form-control") }}
+            {% for error in form.company_name.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.company_department.label }}
+            {{ form.company_department(class="form-control") }}
+            {% for error in form.company_department.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="col form-group">
+            {{ form.company_title.label }}
+            {{ form.company_title(class="form-control") }}
+            {% for error in form.company_title.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
     <div class="form-row">
         <div class="col form-group">
             {{ form.company_street.label }}
@@ -261,8 +407,9 @@
     </fieldset>
 
     <fieldset class="field-border">
-    <legend class="field-border">Realtor Information</legend>
-    <div class="form-row px-4">
+    <legend class="field-border">System Tags</legend>
+    <small class="text-muted">Check all that apply</small><br>
+    <div class="form-row px-4 pt-4">
         <div class="col form-check">
             {{ form.first_time(class="form-check-input") }}
             {{ form.first_time.label(class="form-check-label") }}
@@ -272,122 +419,126 @@
         </div>
     </div>
 
-    <div class="form-row">
-        <div class="col form-group">
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.agent(class="form-check-input") }}
             {{ form.agent.label }}
-            {{ form.agent(class="form-control") }}
             {% for error in form.agent.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
 
-        <div class="col form-group">
+        <div class="col form-check">
+            {{ form.vendor(class="form-check-input") }}
             {{ form.vendor.label }}
-            {{ form.vendor(class="form-control") }}
             {% for error in form.vendor.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
     </div>
 
-    <div class="form-row">
-        <div class="col form-group">
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.investor(class="form-check-input") }}
             {{ form.investor.label }}
-            {{ form.investor(class="form-control") }}
             {% for error in form.investor.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
 
-        <div class="col form-group">
+        <div class="col form-check">
+            {{ form.loan_officer(class="form-check-input") }}
             {{ form.loan_officer.label }}
-            {{ form.loan_officer(class="form-control") }}
             {% for error in form.loan_officer.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
     </div>
 
-    <div class="form-row">
-        <div class="col form-group">
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.talent(class="form-check-input") }}
             {{ form.talent.label }}
-            {{ form.talent(class="form-control") }}
             {% for error in form.talent.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
 
-        <div class="col form-group">
+        <div class="col form-check">
+            {{ form.builder(class="form-check-input") }}
             {{ form.builder.label }}
-            {{ form.builder(class="form-control") }}
             {% for error in form.builder.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
     </div>
 
-    <div class="form-row">
-        <div class="col form-group">
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.reo(class="form-check-input") }}
             {{ form.reo.label }}
-            {{ form.reo(class="form-control") }}
             {% for error in form.reo.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
 
-        <div class="col form-group">
+        <div class="col form-check">
+            {{ form.short_sale(class="form-check-input")}}
             {{ form.short_sale.label }}
-            {{ form.short_sale(class="form-control") }}
             {% for error in form.short_sale.errors %}
-                <span class="text-danger">{{ error }}</span>
+                {{ error }}
             {% endfor %}
         </div>
     </div>
-
-    <div class="form-row">
-        <div class="col form-group">
+    
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.expired(class="form-check-input") }}
             {{ form.expired.label }}
-            {{ form.expired(class="form-control") }}
             {% for error in form.expired.errors %}
-                <span class="text-danger">{{ error }}</span>
+                {{ error }}
             {% endfor %}
         </div>
 
-        <div class="col form-group">
+        <div class="col form-check">
+            {{ form.fsbo(class="form-check-input") }}
             {{ form.fsbo.label }}
-            {{ form.fsbo(class="form-control") }}
             {% for error in form.fsbo.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
 
-        <div class="col form-group">
+    </div>
+
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.sphere(class="form-check-input") }}
             {{ form.sphere.label }}
-            {{ form.sphere(class="form-control") }}
             {% for error in form.sphere.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="col form-group">
+        <div class="col form-check">
+            {{ form.allied_resource(class="form-check-input") }}
             {{ form.allied_resource.label }}
-            {{ form.allied_resource(class="form-control") }}
             {% for error in form.allied_resource.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
+    </div>
 
-        <div class="col form-group">
+    <div class="form-row px-4">
+        <div class="col form-check">
+            {{ form.referral_sources(class="form-check-input") }}
             {{ form.referral_sources.label }}
-            {{ form.referral_sources(class="form-control") }}
             {% for error in form.referral_sources.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
-
     </div>
+
+        
     </fieldset>
 
     <fieldset class="field-border">
@@ -417,6 +568,16 @@
             {{ form.source.label }}
             {{ form.source(class="form-control") }}
             {% for error in form.source.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col form-group">
+            {{ form.other_source.label }}
+            {{ form.other_source(class="form-control") }}
+            {% for error in form.other_source.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
