@@ -1,7 +1,7 @@
 from app import app, db
 import sqlite3
 import pandas as pd
-import xlsxwriter
+import xlsxwriter, xlrd, csv, glob
 from openpyxl import load_workbook
 from datetime import datetime
 from app.forms import ContactForm
@@ -127,6 +127,18 @@ def export():
             worksheet.write(row + i, col + j, d)
 
     workbook.close()
+
+    # convert to csv for download
+    df = pd.read_excel('app/static/kw_db.xlsx', sheetname='Sheet1', header=None)
+    columns = df.iloc[:2]
+    df = df.iloc[2:]
+    columns = columns.fillna('')
+    columns = pd.MultiIndex.from_arrays(columns.values.tolist())
+    df.columns = columns
+    df.to_csv('app/static/kw_db.csv', index=False, na_rep="")
+    message = Markup('<div class="mt-2 alert alert-info"><h4><span class="fa fa-info-circle"></span> Here\'s your file</h4><a href="static/kw_db.csv">Download</a></div>')
+    flash(message)
+
     return redirect(url_for('contacts'))
 
 

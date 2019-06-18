@@ -2,7 +2,7 @@
     {{ form.hidden_tag() }}
     
     <fieldset class="field-border">
-    <legend class="field-border">Personal Information</legend>
+    <legend class="field-border"><strong><span class="fa fa-user"></span> Personal Information</strong></legend>
     <div class="form-row">
         <div class="col form-group">
             {{ form.first_name.label }}
@@ -196,7 +196,7 @@
     </div>
 
     <fieldset class="field-border">
-    <legend class="field-border">Contact Info</legend>
+    <legend class="field-border"><strong><span class="fa fa-phone"></span> Contact Info</strong></legend>
     <div class="form-row">
         <div class="col form-group">
             {{ form.home_phone.label }}
@@ -251,7 +251,7 @@
     </fieldset>
 
     <fieldset class="field-border">
-    <legend class="field-border">Address 1</legend>
+    <legend class="field-border"><strong><span class="fa fa-address-book"></span> Address 1</strong></legend>
     <div class="form-row">
         <div class="col form-group">
             {{ form.street1.label }}
@@ -290,7 +290,7 @@
     </fieldset>
 
     <fieldset class="field-border">
-    <legend class="field-border">Address 2</legend>
+    <legend class="field-border"><strong><span class="fa fa-address-book"></span> Address 2</strong></legend>
     <div class="form-row">
         <div class="col form-group">
             {{ form.street2.label }}
@@ -329,7 +329,7 @@
     </fieldset>
 
     <fieldset class="field-border">
-    <legend class="field-border">Work Information</legend>
+    <legend class="field-border"><strong><span class="fa fa-briefcase"></span> Work Information</strong></legend>
 
     <div class="form-row">
         <div class="col form-group">
@@ -407,7 +407,7 @@
     </fieldset>
 
     <fieldset class="field-border">
-    <legend class="field-border">System Tags</legend>
+    <legend class="field-border"><strong><span class="fa fa-cogs"></span> System Tags</strong></legend>
     <small class="text-muted">Check all that apply</small><br>
     <div class="form-row px-4 pt-4">
         <div class="col form-check">
@@ -542,7 +542,7 @@
     </fieldset>
 
     <fieldset class="field-border">
-    <legend class="field-border">Meta Data</legend>
+    <legend class="field-border"><strong><span class="fa fa-hashtag"></span> Meta Data</strong></legend>
     <div class="form-row">
         <div class="col form-group">
             {{ form.notes.label }}
@@ -583,6 +583,6 @@
         </div>
     </div>
     </fieldset>
-   <p> {{form.submit(class="btn btn-success") }}</p>
+   <p> {{form.submit(class="btn btn-success w-100 rounded-0") }}</p>
 
 </form>
