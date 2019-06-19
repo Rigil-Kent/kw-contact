@@ -45,9 +45,10 @@ def index():
         contact.company_title = form.company_title.data
         contact.company_department = form.company_department.data
         contact.birthday = form.birthday.data
-        contact.home_anniversary = form.birthday.data
+        contact.home_anniversary = form.home_anniversary.data
         contact.agent = form.agent.data
         contact.vendor = form.vendor.data
+        contact.investor = form.investor.data
         contact.loan_officer = form.loan_officer.data
         contact.talent = form.talent.data
         contact.builder = form.builder.data
@@ -72,7 +73,7 @@ def index():
         db.session.add(contact)
         db.session.commit()
 
-        message = Markup('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Contact {} added successfully.</div>'.format(contact.legal_name))
+        message = Markup('<div class="mt-3 alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Contact <strong>{}</strong> added successfully.</div>'.format(contact.legal_name))
         flash(message)
         return redirect(url_for('contacts'))
     return render_template('index.html', form=form)
@@ -136,7 +137,7 @@ def export():
     columns = pd.MultiIndex.from_arrays(columns.values.tolist())
     df.columns = columns
     df.to_csv('app/static/kw_db.csv', index=False, na_rep="")
-    message = Markup('<div class="mt-2 alert alert-info"><h4><span class="fa fa-info-circle"></span> Here\'s your file</h4><a href="static/kw_db.csv">Download</a></div>')
+    message = Markup('<div class="mt-3 alert alert-info"><h4><span class="fa fa-info-circle"></span> Here\'s your file</h4><a href="static/kw_db.csv">Download</a></div>')
     flash(message)
 
     return redirect(url_for('contacts'))
@@ -147,7 +148,7 @@ def delete_contact(id):
     contact = Contact.query.filter_by(id=id).first_or_404()
     db.session.delete(contact)
     db.session.commit()
-    message = Markup('<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Contact {} deleted.</div>'.format(contact.first_name + " " + contact.last_name))
+    message = Markup('<div class="mt-3 alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Contact <strong>{}</strong> deleted.</div>'.format(contact.first_name + " " + contact.last_name))
     flash(message)
     return redirect(url_for('contacts'))
 
